@@ -25,6 +25,7 @@ class SpotController {
       user: user_id,
       thumbnail,
       company,
+      price,
       techs: techs.split(',').map(tech => tech.trim())
     })
 

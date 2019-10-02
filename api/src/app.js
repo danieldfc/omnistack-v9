@@ -3,6 +3,7 @@ import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
+import { resolve } from 'path';
 
 import routes from './routes';
 
@@ -16,12 +17,15 @@ class App {
   }
 
   middlewares() {
-    this.server.use(express.json());
     this.server.use(
       cors({
-        origin: process.env.FRON_URL
+        origin: process.env.FRONT_URL,
       })
     );
+    this.server.use(express.json());
+    this.server.use('/files', express.static(
+      resolve(__dirname, '..', 'tmp', 'uploads'))
+    )
   }
 
   database() {
