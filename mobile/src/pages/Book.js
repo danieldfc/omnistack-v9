@@ -1,10 +1,15 @@
-import React from 'react';
-import { View } from 'react-native';
+import React, { useEffect } from 'react';
+import { SafeAreaView, AsyncStorage } from 'react-native';
 
-// import { Container } from './styles';
+export default function Book({ navigation }) {
+  const id = navigation.getParam('id');
 
-export default function Book() {
-  return (
-    <View />
-  );
+  useEffect(() => {
+    AsyncStorage.getItem('@user/id').then(user => {
+      if (user) {
+      }
+    });
+  }, []);
+
+  return <SafeAreaView />;
 }

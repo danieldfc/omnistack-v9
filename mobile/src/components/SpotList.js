@@ -27,8 +27,8 @@ function SpotList({ tech, navigation }) {
     loadTech();
   }, []);
 
-  function handleNavigation() {
-    navigation.navigate('Book');
+  function handleNavigation(id) {
+    navigation.navigate('Book', { id });
   }
 
   return (
@@ -53,7 +53,7 @@ function SpotList({ tech, navigation }) {
               {item.price ? `R$ ${item.price}` : 'FREE'}
             </Text>
             <TouchableOpacity
-              onPress={handleNavigation}
+              onPress={() => handleNavigation(item._id)}
               style={styles.submitButton}
             >
               <Text style={styles.submitButtonText}>Solicitar reserva</Text>

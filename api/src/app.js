@@ -1,14 +1,14 @@
-import 'dotenv/config';
+import "dotenv/config";
 
-import express from 'express';
-import cors from 'cors';
-import mongoose from 'mongoose';
-import { resolve } from 'path';
+import express from "express";
+import cors from "cors";
+import mongoose from "mongoose";
+import { resolve } from "path";
 
-import socketio from 'socket.io';
-import http from 'http';
+import socketio from "socket.io";
+import http from "http";
 
-import routes from './routes';
+import routes from "./routes";
 
 const conectadoUsuarios = {};
 
@@ -19,27 +19,28 @@ class App {
     this.app = new http.Server(this.server);
     this.io = socketio(this.app);
 
+    this.socket();
     this.middlewares();
     this.database();
-    this.socket();
     this.routes();
   }
 
   middlewares() {
     this.server.use(
       cors({
-        origin: process.env.FRONT_URL,
+        origin: process.env.FRONT_URL
       })
     );
     this.server.use(express.json());
-    this.server.use('/files', express.static(
-      resolve(__dirname, '..', 'tmp', 'uploads'))
-    )
+    this.server.use(
+      "/files",
+      express.static(resolve(__dirname, "..", "tmp", "uploads"))
+    );
   }
 
   socket() {
-    this.io.on('connection', socket => {
-      console.log('Userário Conectado', socket.id);
+    this.io.on("connection", socket => {
+      console.log("Userário Conectado", socket.id);
 
       const { user_id } = socket.handshake.query;
 
@@ -50,13 +51,13 @@ class App {
       req.connectedUsers = conectadoUsuarios;
 
       return next();
-    })
+    });
   }
 
   database() {
     mongoose.connect(process.env.MONGO_URL, {
       useNewUrlParser: true,
-      useUnifiedTopology: true,
+      useUnifiedTopology: true
     });
   }
 
