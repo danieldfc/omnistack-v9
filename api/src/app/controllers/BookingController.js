@@ -30,6 +30,12 @@ class BookingController {
       .populate('user')
       .execPopulate();
 
+    const ownewSocket = req.connectedUsers[booking.spot.user];
+
+    if(ownewSocket) {
+      req.io.to(ownewSocket).emit('booking_request', booking);
+    }
+
     return res.json(booking);
   }
 }
