@@ -16,7 +16,7 @@ class ApprovalController {
       req.io.to(bookingUserSocket).emit("booking_response", booking);
     }
 
-    res.json(booking);
+    return res.json(booking);
   }
 }
 

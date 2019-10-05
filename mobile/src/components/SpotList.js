@@ -20,8 +20,6 @@ function SpotList({ tech, navigation }) {
         params: { tech },
       });
 
-      console.log(response.data);
-
       setSpots(response.data);
     }
     loadTech();
@@ -39,7 +37,7 @@ function SpotList({ tech, navigation }) {
       <FlatList
         style={styles.list}
         data={spots}
-        keyExtractor={spot => String(spot._id)}
+        keyExtractor={spot => spot._id}
         horizontal
         showsHorizontalScrollIndicator={false}
         renderItem={({ item }) => (
@@ -95,6 +93,11 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#333',
     marginTop: 10,
+  },
+  price: {
+    fontSize: 15,
+    color: '#999',
+    marginTop: 5,
   },
   submitButton: {
     height: 32,
